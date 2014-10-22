@@ -1,0 +1,25 @@
+.container-fluid{
+	@include container-fixed();
+}
+.container{
+	@extend .container-fluid;
+	@each $breakpoint in $breakpoints {
+		@media screen and (min-width: nth($breakpoint,2)){
+			width : nth($breakpoint,3);
+		}
+	}
+}
+
+.row{
+	@include make-row();
+}
+
+@include make-grid-columns($sizes);
+
+@include make-grid(xs);
+
+@each $breakpoint in $breakpoints {
+	@media screen and (min-width: nth($breakpoint,2)){
+		@include make-grid(nth($breakpoint,1));
+	}
+}

@@ -1,0 +1,33 @@
+@mixin circle($radius:5px,$color:#fff){
+	@include size($radius*2);
+	@include border-radius($radius);
+	background-color:$color;
+}
+
+@mixin set-border($side,$width,$color){
+	border-#{$side}:$width solid $color;
+}
+
+@function oposite-side($side){
+	@if $side==top{
+		@return (bottom); 
+	}@else if $side == bottom{
+		@return (top);
+	} @else if $side == left {
+		@return (right);
+	} @else {
+		@return (left);
+	}
+}
+
+@mixin triangle($width,$direction,$color){
+	@include size(0px);
+	$opposite:oposite-side($direction);
+	$sides:(top,bottom,left,right);
+	@each $s in $sides{
+		@if ($s != $direction and $s != $opposite) {
+			@include set-border($s,$width,transparent);
+		}
+	}
+	@include set-border($opposite,$width,$color);
+}

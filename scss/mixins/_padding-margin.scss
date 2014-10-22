@@ -1,0 +1,22 @@
+$position:('top','right','bottom','left');
+$pValue:(
+	n  : 0px,
+	xs : 5px,
+	sm : 10px,
+	md :	15px,
+	lg : 20px 
+);
+
+@mixin padding-margin($property){
+	.#{str-slice($property,1,1)}-n{
+		#{$property}:0px;
+	}
+	@each $p in $position {
+		@each $v in $pValue {
+			.#{str-slice($property,1,1)}-#{str-slice($p,1,1)}-#{nth($v,1)} {
+				#{$property}-#{$p} : #{nth($v,2)}; 
+		}
+			} 
+	}	
+}
+

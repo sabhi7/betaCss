@@ -1,0 +1,74 @@
+//Generate the grid based on the number of columns
+
+@mixin make-grid-columns($sizes){
+	$selector :();
+	@each $size in $sizes {
+		@for $i from 1 through $grid-columns {
+			$selector :append($selector, unquote('.col-#{$size}-#{$i}'),comma);
+		}
+	}
+	#{$selector} {
+		position: relative;
+  	min-height: 1px;
+		padding-left: ($grid-gutter-width / 2);
+		padding-right: ($grid-gutter-width / 2);
+	}	
+}
+
+@mixin float-grid-columns($size){
+	$selector :();
+	@for $i from 1 through $grid-columns {
+		$selector :append($selector, unquote('.col-#{$size}-#{$i}'),comma);
+	}
+	#{$selector} {
+		float: left;
+	}	
+}
+
+@mixin calc-grid-columns($size,$type,$i){
+	@if ($type == width) and ($i > 0) {
+		.col-#{$size}-#{$i} {
+			width: percentage( $i / $grid-columns);
+		}
+	}
+	@if ($type == pull) and ($i == 0){
+		.col-#{$size}-pull-#{$i} {
+			right:auto;
+		}
+	}
+	@if ($type == pull) and ($i > 0){
+		.col-#{$size}-pull-#{$i} {
+			right:percentage(($i / $grid-columns));
+		}
+	}
+	@if ($type == push) and ($i == 0){
+		.col-#{$size}-push-#{$i} {
+			left:auto;
+		}
+	}
+	@if ($type == push) and ($i > 0){
+		.col-#{$size}-push-#{$i} {
+			left:percentage(($i / $grid-columns));
+		}
+	}
+	@if ($type == offset) {
+    .col-#{$size}-offset-#{$i} {
+      margin-left: percentage(($i / $grid-columns));
+    }
+  }
+
+}
+
+@mixin loop-grid-columns($size,$type){
+	@for $i from 0 through $grid-columns {
+		@include calc-grid-columns($size,$type,$i);
+	}
+} 
+
+@mixin make-grid($size){
+ @include float-grid-columns($size);
+ @include loop-grid-columns($size,width);
+ @include loop-grid-columns($size,pull);
+ @include loop-grid-columns($size,push);
+ @include loop-grid-columns($size,offset);
+}

@@ -1,0 +1,8 @@
+@mixin border($side,$color,$value:1px,$style:solid){
+	@if (str-length($side)> 0) {
+	 border-#{$side}: $value $style $color;
+  }
+  @else {
+  	border: $value $style $color;
+  }
+}

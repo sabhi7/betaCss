@@ -1,0 +1,10 @@
+@mixin reset-property($property,$list){
+	@if $list == all {
+		#{$property}:0px;
+	}
+	@else{
+		@each $l in $list{
+			#{$property}-#{$l}:0px;
+		}
+	}
+}

@@ -1,0 +1,7 @@
+.circle{
+	@include circle(10px,red);
+}
+
+.triangle{
+	@include triangle(5px,right,green);
+}

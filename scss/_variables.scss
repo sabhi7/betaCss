@@ -1,0 +1,27 @@
+
+// grid variables
+$grid-columns: 12 !default;
+$grid-gutter-width: 30px !default;
+//$gutter : ($grid-gutter-width);
+
+$screen-sm:768px !default;
+$screen-md:992px !default;
+$screen-lg:1200px !default;
+
+$container-sm : ((720px + $grid-gutter-width)) !default;
+$container-md : ((940px + $grid-gutter-width)) !default;
+$container-lg : ((1140px + $grid-gutter-width)) !default;
+
+$breakpoints : (
+	'sm'  $screen-sm  $container-sm,
+	'md'  $screen-md $container-md,
+	'lg' $screen-lg $container-lg
+);
+
+$sizes :("xs");
+@each $breakpoint in $breakpoints{
+	$sizes : append($sizes,nth($breakpoint,1),comma) !global;
+}
+
+
+
